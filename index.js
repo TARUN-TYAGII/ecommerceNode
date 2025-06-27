@@ -16,6 +16,10 @@ app.use('/api/users', userRoutes);
 app.use('/api/categories', categoryRoutes);
 app.use('/api/products', productRoutes);
 
+app.get('/', (req,res) =>{
+    res.send('Hello World');
+})
+
 console.log(process.env.MONGODB_URI);
 mongoose.connect(process.env.MONGODB_URI)
 .then(() => {
