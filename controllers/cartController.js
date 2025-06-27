@@ -66,4 +66,7 @@ exports.clearCart = async (req,res) =>{
         await cart.save();
         return cart;
     }
+    catch(error){
+        res.status(500).json({error : error.message});
+    }
 }
