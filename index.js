@@ -6,7 +6,8 @@ const cors = require('cors');
 const userRoutes = require('./routes/userRoutes');
 const categoryRoutes = require('./routes/categoryRoutes');
 const productRoutes = require('./routes/productRoutes');
-
+const orderRoutes = require('./routes/orderRoutes');
+const cartRoutes = require('./routes/cartRoutes');
 require('dotenv').config();
 
 
@@ -15,7 +16,10 @@ app.use(express.json());
 app.use('/api/users', userRoutes);
 app.use('/api/categories', categoryRoutes);
 app.use('/api/products', productRoutes);
+app.use('/api/cart', cartRoutes);
+app.use('/api/orders', orderRoutes);
 
+// home route
 app.get('/', (req,res) =>{
     res.send('Hello World');
 })

@@ -3,7 +3,8 @@ const Cart = require('../models/cart');
 exports.addToCart = async (req,res) =>{
     try{
         const {userId, productId, quantity} = req.body;
-        const cart = Cart.findOne({userId});
+
+        let cart = await Cart.findOne({userId});
         if(!cart){
             cart = await Cart.create({userId, items : []});
         }
@@ -16,7 +17,7 @@ exports.addToCart = async (req,res) =>{
         }
 
         await cart.save();
-       return cart;
+        res.status(200).json(cart);
     }
     catch(error){
         res.status(500).json({error : error.message});
@@ -47,7 +48,7 @@ exports.removeFromCart = async (req,res) =>{
         }
         cart.items = cart.items.filter(i => i.product.toString() !== productId);
         await cart.save();
-        return cart;
+        res.status(200).json(cart);
         
     }catch(error){
         res.status(500).json({error : error.message});
@@ -64,7 +65,7 @@ exports.clearCart = async (req,res) =>{
         }
         cart.items = [];
         await cart.save();
-        return cart;
+        res.status(200).json(cart);
     }
     catch(error){
         res.status(500).json({error : error.message});
